@@ -81,8 +81,9 @@ var Optinoid = {
 					// form submit
 					self.formSubmit();
 				}
-			
+
 				self.open();
+				
 				e.preventDefault();		
 			}
 		});
@@ -153,7 +154,15 @@ var Optinoid = {
 					self.events();
 					
 					// open popup
-					self.open();
+					self.exit = self.el.data('exit');
+					// trigger optinoid when user tries to leave browser
+					if(self.exit == 'yes') {
+						j(document).one('mouseleave', 'html,body', function(){
+							self.open();
+						});
+					} else {
+						self.open();
+					}
 					
 					return false;
 //				}

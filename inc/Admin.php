@@ -139,6 +139,25 @@ class Optinoid_Admin {
 						</p>
 					</td>
 				</tr>
+				<tr>
+					<td style="width: 50%;">
+						<p>
+							<legend style="margin-bottom: 5px;"><strong>Show on Exit:</strong></legend>
+							<?php
+								$optin_media = array(
+									array('name' => 'no', 'label' => 'No'),
+									array('name' => 'yes', 'label' => 'Yes'),
+								);
+								$optinoid_exit = get_post_meta($post->ID, 'optinoid_exit', true);
+							?>
+							<input type="hidden" name="optinoid_exit" value="no" />
+							<?php foreach($optin_media as $k=>$v): ?>
+							<label><input type="radio" name="optinoid_exit" value="<?php echo $v['name']; ?>"<?php if(isset($optinoid_exit) && $optinoid_exit == $v['name']) echo ' checked="checked"'; ?> /><?php echo $v['label']; ?></label> &nbsp;&nbsp;&nbsp; 
+							<?php endforeach; ?>
+						</p>
+					</td>
+					<td></td>
+				</tr>
 				<tr id="optinoid-shortcode" class="hidden">
 					<td style="width: 50%;">
 						<p>
