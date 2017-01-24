@@ -164,9 +164,10 @@ class Optinoid_Api {
 		$bg_color = get_post_meta($optin->ID, 'optinoid_bg_color', true);
 		$arrow_color = get_post_meta($optin->ID, 'optinoid_arrow_color', true);
 		$text_color = get_post_meta($optin->ID, 'optinoid_text_color', true);
+		$on_exit = get_post_meta($optin->ID, 'optinoid_exit', true);
 		
 		?>
-		<div class="<?php echo implode(' ', $this->args['class']); ?>" data-delay="<?php echo $optin_delay; ?>" data-ID="<?php echo $optin->ID; ?>" data-type="<?php echo $optin_type; ?>" data-text-color="<?php echo $text_color; ?>" data-btn-color="<?php echo $button_color; ?>" data-btn-text-color="<?php echo $button_text_color; ?>" data-arrow-color="<?php echo $arrow_color; ?>" data-bg-color="<?php echo $bg_color; ?>">
+		<div class="<?php echo implode(' ', $this->args['class']); ?>" data-delay="<?php echo $optin_delay; ?>" data-ID="<?php echo $optin->ID; ?>" data-type="<?php echo $optin_type; ?>" data-text-color="<?php echo $text_color; ?>" data-btn-color="<?php echo $button_color; ?>" data-btn-text-color="<?php echo $button_text_color; ?>" data-arrow-color="<?php echo $arrow_color; ?>" data-bg-color="<?php echo $bg_color; ?>" data-exit="<?php echo $on_exit; ?>">
 		<?php
 		
 		// check if theme has template to over-ride plugin
