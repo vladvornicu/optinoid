@@ -156,7 +156,13 @@ class Optinoid_Admin {
 							<?php endforeach; ?>
 						</p>
 					</td>
-					<td></td>
+					<td>
+						<p>
+							<?php $post_meta = get_post_meta($post->ID, 'optinoid_custom_class', true); ?>
+							<label for="optinoid_custom_class"><strong>Custom CSS Classes</strong> <em>(use spaces)</em></label><br />
+							<input type="text" name="optinoid_custom_class" id="optinoid_custom_class" placeholder="" style="width: 75%;" value="<?php echo isset($post_meta)?$post_meta:''; ?>" />
+						</p>
+					</td>
 				</tr>
 				<tr id="optinoid-shortcode" class="hidden">
 					<td style="width: 50%;">

@@ -155,6 +155,12 @@ class Optinoid_Api {
 		if(!empty($options['linked'])) {
 			$this->args['class'][] = 'linked';
 		}
+
+		$optinoid_custom_class = get_post_meta($optin->ID, 'optinoid_custom_class', true);
+		
+		if(!empty($optinoid_custom_class)) {
+			$this->args['class'][] = $optinoid_custom_class;
+		}
 		
 		// do action before render to be able to manage css classes
 		do_action( 'optinoid_before_render' );
