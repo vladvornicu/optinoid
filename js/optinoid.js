@@ -154,11 +154,10 @@ var Optinoid = {
 					self.events();
 					
 					// open popup
-
 					self.exit = self.el.data('exit');
 					// trigger optinoid when user tries to leave browser
 					if(self.exit == 'yes') {
-						j('html,body').mouseleave(function(){
+						j(document).one('mouseleave', 'html,body', function(){
 							self.open();
 						});
 					} else {
