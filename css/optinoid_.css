@@ -738,9 +738,6 @@
 }
 /* @end */
 @media only screen and (max-width: 767px) {
-  body.optinoid-open {
-    overflow: hidden;
-  }
   #optinoid-overlay.active {
     position: absolute;
     bottom: auto;
@@ -761,13 +758,6 @@
     -o-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
     transform: translate(0, 0);
-  }
-  .optinoid-optin input[type=text],
-  .optinoid-optin input[type=email] {
-    font-size: 16px !important;
-  }
-  .optinoid-optin .optinoid-container {
-    background-attachment: scroll;
   }
   .optinoid-optin .optinoid-form-inner {
     display: block;
@@ -799,7 +789,7 @@
     top: 6px;
   }
   .optinoid-optin.content-over-image {
-    position: absolute !important;
+    position: absolute;
     left: 0;
     top: 0;
     bottom: 0;

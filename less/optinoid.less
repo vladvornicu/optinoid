@@ -225,20 +225,18 @@
 		margin-bottom: 0;
 	}
 	.optinoid-field {
-		/*width: 69%;*/
-		width: 100%;
+		width: 69%;
 		float: left;
 		&.has-multiple-fields {
-			/*width: 39%;*/
-			/*margin-right: 1%;*/
+			width: 39%;
+			margin-right: 1%;
 		}
 	}
 	.optinoid-button {
-		/*width: 29%;*/
-		white-space: nowrap;	
+		width: 29%;
 		float: right;
 		&.has-multiple-fields {
-			/*width: 19%;*/
+			width: 19%;
 		}
 	}
 	button, .button {
@@ -335,24 +333,22 @@
 		border: 1px solid #DDD;
 	}
 	.optinoid-scroll {
-		width: 40px;
-		height: 40px;
+		width: 30px;
+		height: 50px;
 		position: absolute;
 		left: 50%;
-		margin-left: -20px;
+		right: 50%;
 		bottom: 40px;
 		cursor: pointer;
 		.animation(bouncing, 1s, linear, infinite);
-		border: 3px solid #666;
-		.rounded(30px);
 		&.split-screen {
 			left: 75%;
 		}
 		i {
 			content: "";
-			width: 3px;
-			height: 10px;
-			bottom: 35%;
+			width: 2px;
+			height: 20px;
+			bottom: 0;
 			position: absolute;
 			background: #666;
 			.rounded(5px);
@@ -437,18 +433,6 @@
 /* @group THEMES */
 
 .optinoid-optin {
-	.optinoid-form-inner {
-		display: table;
-		width: 100%;
-		.optinoid-input {
-			padding: 0 .25em;
-			width: 100%;
-			display: table-cell;
-			&.has-multiple-fields {
-				width: 50%;
-			}
-		}
-	}
 	&.content-below-image {
 		.optinoid-container {
 			float: left;
@@ -523,19 +507,10 @@
 		border: 0;
 		margin-left: 0;
 		width: 100%;
-		border: 0 !important;
+		border: 0;
 		&.active {
 			top: 0;
 			.translate(0,0);
-		}
-		.optinoid-form-inner {
-			display: block;
-			.optinoid-input {
-				display: block;
-				&.has-multiple-fields {
-					width: 100%;
-				}
-			}
 		}
 		.optinoid-field {
 			width: 100%;
@@ -557,29 +532,6 @@
 			right: 6px;
 			top: 6px;
 		}
-		&.content-over-image {
-			position: absolute;
-			left: 0;
-			top: 0;
-			bottom: 0;
-			right: 0;
-			.optinoid-container {
-				float: none;
-				position: absolute;
-				left: 0;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				padding: 0.9375rem;
-			}
-			form {
-				position: absolute;
-				padding: 0.9375rem;
-				left: 0;
-				bottom: 0;
-				right: 0;
-			}
-		}
 	}
 	#optinoid-floating-bar {
 		height: auto;
@@ -595,8 +547,5 @@
 				display: block;
 			}
 		}
-	}
-	.optinoid-scroll {
-		display: none !important;
 	}
 }

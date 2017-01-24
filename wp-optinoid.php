@@ -2,9 +2,9 @@
 /*
 Plugin Name: Optinoid
 Description: Optins Plugin - modal window & welcome mat optin for Wordpress
-Author: Stefan Olaru
+Author: Truth Web Design
 Version: 1.1
-Author URI: http://stefanolaru.com/
+Author URI: http://truthwebdesign.com
 */
 
 // Exit if accessed directly.

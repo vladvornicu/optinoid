@@ -1,5 +1,3 @@
-/* @codekit-prepend "vendor/js.cookie.js" */
-
 var j = jQuery.noConflict();
 
 var Optinoid = {
@@ -21,13 +19,21 @@ var Optinoid = {
 			this.isMobile = true;
 		}
 		
+		var inline_optins = [];
+		// check if there are any inline optins to be loaded
+		if(j('.preload-optinoid').length) {
+			j('.preload-optinoid').each(function(){
+				inline_optins.push(j(this).data('id'));
+			});
+		}
+		
 		// get all optins except inline ones
 		jQuery.post(optinoid.api_url, {
 			id: optinoid.id, 
 			action: 'load_optinoid', 
 			security: optinoid.nonce,
 			mobile: this.isMobile,
-			inline: false,
+			inline: inline_optins,
 			is_home: optinoid.is_home
 //			closed: typeof(this.cookies)!=='undefined'?this.cookies:null
 		}, function(response) {
@@ -38,6 +44,9 @@ var Optinoid = {
 			// open optins
 			self.getOptins();
 		});
+		
+		// events
+		self.events();
 		
 		
 	},
@@ -54,6 +63,28 @@ var Optinoid = {
 		j(document).on('click', '.optinoid-scroll', function(e) {
 			self.close(true);
 			e.preventDefault();
+		});
+		
+		// trigger inline optin
+		j(document).on('click', '.optinoid-trigger', function(e) {
+			
+			// check if href is set, then follow
+			if(j(this).attr('href') != '#') {
+				return true;		
+			} else {
+				// populate optin	
+				if(j('.optinoid-optin[data-id="'+j(this).data('id')+'"]').length) {
+				
+					self.el = j('.optinoid-optin[data-id="'+j(this).data('id')+'"]');
+					self.type = self.el.data('type');
+					
+					// form submit
+					self.formSubmit();
+				}
+			
+				self.open();
+				e.preventDefault();		
+			}
 		});
 		
 		// click on ovelay
@@ -111,9 +142,9 @@ var Optinoid = {
 				
 				self.type = j(self.el).data('type');
 				
-				var id = j(self.el).data('id');
+//				var id = j(self.el).data('id');
 				
-				if(j.inArray(id, self.cookies) === -1) {
+//				if(j.inArray(id, self.cookies) === -1) {
 				
 					// form submit
 					self.formSubmit();
@@ -125,7 +156,7 @@ var Optinoid = {
 					self.open();
 					
 					return false;
-				}
+//				}
 				
 			});
 			
@@ -152,6 +183,8 @@ var Optinoid = {
 						if(response.redirect === true) {
 							window.location = response.url;
 						}
+						
+						j.event.trigger('optinoidSuccess');
 					
 						self.close(false);
 					}
@@ -181,8 +214,16 @@ var Optinoid = {
 		}
 		
 		if(el) {
-			j(el).delay(j(this.el).data('delay')).queue(function(){
+			
+			var open_delay = j(this.el).data('delay');
+			if(j(this.el).hasClass('optinoid-manual')) {
+				open_delay = 0;
+			}
+		
+			j(el).delay(open_delay).queue(function(){
 				j(this).addClass('active').dequeue();
+				
+				j('body').addClass('optinoid-open');
 				
 				// add body padding top if welcomemat
 				if(el == '#optinoid-welcome') {
@@ -200,7 +241,7 @@ var Optinoid = {
 			
 		}
 		// open popup and add class active
-		j(this.el).delay(j(this.el).data('delay')).queue(function(){
+		j(this.el).delay(open_delay).queue(function(){
 			j(this).addClass('active').dequeue();
 			
 			// add styling
@@ -233,6 +274,19 @@ var Optinoid = {
 				j('.optinoid-scroll > i', j(el)).css('background', style.arrowColor);
 				j('.optinoid-scroll', j(el)).css('border-color', style.arrowColor);
 			}
+			
+			//
+			/*
+			if(this.isMobile === true) {
+				j(document).on('blur', 'input, textarea', function() {
+				    setTimeout(function() {
+				        window.scrollTo(document.body.scrollLeft, document.body.scrollTop);
+				    }, 0);
+				});
+			}
+			*/
+			
+			j.event.trigger('optinoidOpen');
 		});
 		
 		// update views
@@ -262,6 +316,11 @@ var Optinoid = {
 		if(j('body').hasClass('optinoid-welcome-padding')) {
 			j('body').removeClass('optinoid-welcome-padding').css('padding-top', 0);
 		}
+		
+		j('body').removeClass('optinoid-open');
+		
+		// trigger optinoid close
+		j.event.trigger('optinoidClose');
 		
 		// set cookie to prevent this opening further
 		if(set_cookie) {
