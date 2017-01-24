@@ -29,7 +29,7 @@ class Optinoid_Output {
 		if(!is_admin()) {
 			// just frontend stuff
 			wp_enqueue_style('optinoid', plugin_dir_url(dirname(__FILE__)). 'css/optinoid.css', 1);
-			wp_enqueue_script('optinoid', plugin_dir_url(dirname(__FILE__)). 'js/optinoid.min.js', false, null, true);
+			wp_enqueue_script('optinoid', plugin_dir_url(dirname(__FILE__)). 'js/optinoid.js', false, null, true);
 		}
 	}
 		
